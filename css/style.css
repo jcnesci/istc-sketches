@@ -1,0 +1,41 @@
+@import url('reset.css');
+
+/* apply a natural box layout model to all elements */
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
+
+body { 
+	font: 14px Helvetica, sans-serif; 
+	text-align: center; 
+	background: #eee;
+}
+
+article, aside, figure, footer, header, hgroup,
+menu, nav, section { display: block; }
+
+section { padding: 100px; }
+
+h2 {
+  color: black;
+  display: block;
+  padding: 20px;
+  font: bold 72px Helvetica;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.hovertown span {
+  -webkit-transition: all 0.9s ease;
+  -moz-transition:    all 0.9s ease;
+  -o-transition:      all 0.9s ease;
+  transition:         all 0.9s ease;
+}
+.hovertown span:hover {
+  text-shadow: 0 0 72px black; 
+  color: transparent;     
+  -webkit-transition: all 0.2s ease;
+  -moz-transition:    all 0.2s ease;
+  -o-transition:      all 0.2s ease;
+  transition:         all 0.2s ease; 
+}
