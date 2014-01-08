@@ -5,26 +5,89 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 	<script src="js/jquery.lettering.js"></script>
+	<script src="js/common.js"></script>
 	<script>
-	 $(function() {
-	   
-	  // apply spans
-      $("h2").lettering();
+	$(function() {
 
-     });
-    </script>
+		var words = $(".tweet").text().split(" ");
+		$(".tweet").empty();
+		$.each(words, function(i, word) {
+			var formattedWord = "";
+			// if cur word is the main word, wrap in special class
+			if (word.charAt(0) === "*" && word.charAt(word.length-1) === "*") {
+				word = word.substr(1, word.length-2)
+				formattedWord = $("<span class='main-word'>").text(word);
+				var mainWord = $(formattedWord).appendTo($(".tweet"));
+				// console.log(mainWord)
+
+				// position main word in the center
+				var x = $('.tweet').width()/2 - mainWord.width()/2;
+				var y = $('.tweet').height()/2 - mainWord.height()/2;
+				mainWord.css({top: y, left: x});
+
+				mainWord.click(function() { alignWords(); });
+			} 
+			// else, wrap normal word in other class 
+			else {
+				formattedWord = $("<span class='other-word'>").text(word);
+				var otherWord = $(formattedWord).appendTo($(".tweet"));
+				// console.log(otherWord)
+
+				// give word random scale, and opacity
+				var alpha = random_float(0.01, 0.3);
+				var fontSize = Math.floor(Math.random() * 20) * otherWord.css("font-size").substr(0, otherWord.css("font-size").length-2);
+				otherWord.css({opacity: alpha, 'font-size':fontSize});
+
+				// position word randomly
+				var padding = 50;
+				var maxWidth = $('.tweet').width() - padding;
+				var maxHeight = $('.tweet').height() - padding;
+				var x = Math.floor(Math.random() * maxWidth) - otherWord.width();
+				var y = Math.floor(Math.random() * maxHeight)  - otherWord.height();
+				otherWord.css({top: y, left: x});
+			}
+		});
+		
+		function alignWords() {
+			var x_align = 100;	
+			$('.other-word').each(function(index, item){
+				$(item).toggleClass("other-word-animate");
+				console.log($('.main-word').css("font-size"))
+				console.log("t- x1 = "+ x_align)
+
+				$(item).animate({
+					'font-size': $('.main-word').css("font-size").substr(0, $('.main-word').css("font-size").length-2),
+					top: $('.main-word').css("top"),
+					left: x_align
+				}, function() {
+					x_align += $(this).width() + 5;
+					console.log("width = "+ $(this).width());
+					console.log("t- x = "+ x_align);	
+				});
+
+			});
+		}
+
+
+	  // apply spans
+      // $("h2").lettering();
+
+    });
+</script>
 </head>
 
-	<body>
-		<section>
-			Had the most vivid, amazing dream once .I were riding a <h2 class="hovertown">stallion</h2> in the bush near a waterfall dressed  in ceremonial  pres. guard uniform.	
-		  <!-- <h2 class="hovertown">Hovertown</h2> -->		
-		</section>
+<body>
+	<div class="tweet">
+		Had the most vivid, amazing dream once .I were riding a *stallion* in the bush near a waterfall dressed in ceremonial pres. guard uniform.	
+		<!-- <h2 class="hovertown">Hovertown</h2> -->		
+	</div>
+		<!-- 
 		<section>
 			Justin I love you too, please follow me realize the dream of my life, I <h2 class="hovertown">love</h2> you so much! S2 @justinbieber 144
 		</section>
 		<section>
 			Get A Better Night Sleep With #zeepo <h2 class="hovertown">Sleep</h2> Mask and Dream Essentials http://tinyurl.com/kbqo8rw @DreamEssentials @mistymarie34
 		</section>
-	</body>
+	-->
+</body>
 </html>
