@@ -22,13 +22,20 @@ section { padding: 100px; }
   width: 100%;
   height: 300px;
   margin: 0px auto;
+  margin-top: 50px;
   border: 1px solid red;
+  font: bold 24px Helvetica;
+  text-transform: uppercase;
+  letter-spacing: -1px;
 }
 span {
-  position: absolute;
-  display: block;
+  position: relative;
+  display: inline-block;
+  margin-right: 5px;
 }
 span.other-word {
+  position: absolute;
+  display: block;
   z-index: 1;
   text-shadow: 0 0 72px black; 
   color: transparent;     
@@ -50,7 +57,13 @@ span.other-word:hover {
   transition:         all 0.9s ease;
 }
 span.other-word-animate {
-  color: black;
+  position: relative;
+  display: inline-block;
+  margin-right: 5px;
+  opacity: 1;
+  font: 24px Helvetica;
+
+  /*color: black;
   padding: 0px;
   margin: 0px;
   font: 24px Helvetica;
@@ -58,9 +71,11 @@ span.other-word-animate {
   -webkit-transition: all 0.9s ease;
   -moz-transition:    all 0.9s ease;
   -o-transition:      all 0.9s ease;
-  transition:         all 0.9s ease;
+  transition:         all 0.9s ease;*/
 }
 span.main-word {
+  position: absolute;
+  display: block;
   z-index: 1000;
   color: black;
   padding: 0px;
