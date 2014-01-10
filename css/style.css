@@ -3,10 +3,10 @@
 /* apply a natural box layout model to all elements */
 *, *:before, *:after {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
- }
+}
 
 body { 
-	font: 14px Helvetica, sans-serif; 
+	font: 24px Helvetica, sans-serif; 
 	text-align: center; 
 	background: #eee;
 }
@@ -16,15 +16,90 @@ menu, nav, section { display: block; }
 
 section { padding: 100px; }
 
-h2 {
-  color: black;
+.tweet {
+  position: relative;
   display: block;
-  padding: 20px;
-  font: bold 72px Helvetica;
+  width: 100%;
+  height: 300px;
+  margin: 0px auto;
+  margin-top: 50px;
+  border: 1px solid red;
+  font: bold 24px Helvetica;
   text-transform: uppercase;
   letter-spacing: -1px;
 }
+span {
+  position: relative;
+  display: inline-block;
+  margin-right: 5px;
+}
+span.other-word {
+  position: absolute;
+  display: block;
+  z-index: 1;
+  text-shadow: 0 0 72px black; 
+  color: transparent;     
+  -webkit-transition: all 0.2s ease;
+  -moz-transition:    all 0.2s ease;
+  -o-transition:      all 0.2s ease;
+  transition:         all 0.2s ease;
+}
+span.other-word:hover {
+  color: black;
+  padding: 0px;
+  margin: 0px;
+  font: bold 24px Helvetica;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  -webkit-transition: all 0.9s ease;
+  -moz-transition:    all 0.9s ease;
+  -o-transition:      all 0.9s ease;
+  transition:         all 0.9s ease;
+}
+span.other-word-animate {
+  /*position: relative;*/
+  /*display: inline-block;*/
+  margin-right: 5px;
+  opacity: 1;
+  font: 24px Helvetica;
+  text-shadow: none;
+  color: black;
 
+  /*color: black;
+  padding: 0px;
+  margin: 0px;
+  font: 24px Helvetica;
+  letter-spacing: -1px;
+  -webkit-transition: all 0.9s ease;
+  -moz-transition:    all 0.9s ease;
+  -o-transition:      all 0.9s ease;
+  transition:         all 0.9s ease;*/
+}
+span.main-word {
+  position: absolute;
+  display: block;
+  z-index: 1000;
+  color: black;
+  padding: 0px;
+  margin: 0px;
+  font: bold 24px Helvetica;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  -webkit-transition: all 0.9s ease;
+  -moz-transition:    all 0.9s ease;
+  -o-transition:      all 0.9s ease;
+  transition:         all 0.9s ease;
+}
+span.main-word:hover {
+  cursor: pointer;
+  text-shadow: 0 0 72px black; 
+  color: transparent;     
+  -webkit-transition: all 0.2s ease;
+  -moz-transition:    all 0.2s ease;
+  -o-transition:      all 0.2s ease;
+  transition:         all 0.2s ease; 
+}
+/*
 .hovertown span {
   -webkit-transition: all 0.9s ease;
   -moz-transition:    all 0.9s ease;
@@ -39,3 +114,4 @@ h2 {
   -o-transition:      all 0.2s ease;
   transition:         all 0.2s ease; 
 }
+*/
