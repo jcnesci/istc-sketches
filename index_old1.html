@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Intel Sketch 1</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="js/jquery.lettering.js"></script>
+	<script src="js/common.js"></script>
+	<script>
+	$(function() {
+
+		var words = $(".tweet").text().split(" ");
+		$(".tweet").empty();
+		$.each(words, function(i, word) {
+			var formattedWord = "";
+			// if cur word is the main word, wrap in special class
+			if (word.charAt(0) === "*" && word.charAt(word.length-1) === "*") {
+				
+				// Store word's X,Y position in the sentence and wrap in span.
+				word = word.substr(1, word.length-2)
+				formattedWord = $("<span>").text(word);
+				var mainWord = $(formattedWord).appendTo($(".tweet"));
+				mainWord.data("starting_x", mainWord.position().left);
+				mainWord.data("starting_y", mainWord.position().top);
+				
+				// Give a new class to position the word.
+				mainWord.addClass("main-word");
+
+				// Position main word in the center of div.
+				var x = $('.tweet').width()/2 - mainWord.width()/2;
+				var y = $('.tweet').height()/2 - mainWord.height()/2;
+				mainWord.css({top: y, left: x});
+
+				// On click, align all words back into sentence form.
+				mainWord.click(function() { alignWords(); });
+
+				// console.log(mainWord)
+				console.log("main x = "+ mainWord.data("starting_x"))
+				console.log("main y = "+ mainWord.data("starting_y"))
+			} 
+			// else, wrap normal word in other class 
+			else {
+				// Store word's X,Y position in the sentence and wrap in span.
+				formattedWord = $("<span>").text(word);
+				var otherWord = $(formattedWord).appendTo($(".tweet"));
+				otherWord.data("starting_x", otherWord.position().left);
+				otherWord.data("starting_y", otherWord.position().top);
+				
+				// Give a new class to position the word.
+				otherWord.addClass("other-word");
+
+				// Give word random scale, and opacity.
+				var alpha = random_float(0.01, 0.3);
+				var fontSize = Math.floor(Math.random() * 20) * otherWord.css("font-size").substr(0, otherWord.css("font-size").length-2);
+				otherWord.css({opacity: alpha, 'font-size':fontSize});
+
+				// Position word randomly.
+				var padding = 50;
+				var maxWidth = $('.tweet').width() - padding;
+				var maxHeight = $('.tweet').height() - padding;
+				var x = Math.floor(Math.random() * maxWidth) - otherWord.width();
+				var y = Math.floor(Math.random() * maxHeight)  - otherWord.height();
+				otherWord.css({top: y, left: x});
+
+				console.log("other x = "+ otherWord.data("starting_x"))
+				console.log("other y = "+ otherWord.data("starting_y"))
+				// console.log(otherWord)
+			}
+		});
+		
+		function alignWords() {
+			var x_align = 100;	
+			$('.other-word').each(function(index, item){
+				$(item).toggleClass("other-word-animate");
+				console.log($('.main-word').css("font-size"))
+				console.log("t- x1 = "+ x_align)
+
+				$(item).animate({
+					'font-size': $('.main-word').css("font-size").substr(0, $('.main-word').css("font-size").length-2),
+					top: $('.main-word').css("top"),
+					left: x_align
+				}, function() {
+					x_align += $(this).width() + 5;
+					console.log("width = "+ $(this).width());
+					console.log("t- x = "+ x_align);	
+				});
+
+			});
+		}
+
+		// function alignWords() {
+		// 	var x_align = 100;	
+		// 	$('.other-word').each(function(index, item){
+		// 		$(item).toggleClass("other-word-animate");
+		// 		console.log($('.main-word').css("font-size"))
+		// 		console.log("t- x1 = "+ x_align)
+
+		// 		$(item).animate({
+		// 			'font-size': $('.main-word').css("font-size").substr(0, $('.main-word').css("font-size").length-2),
+		// 			top: $('.main-word').css("top"),
+		// 			left: x_align
+		// 		}, function() {
+		// 			x_align += $(this).width() + 5;
+		// 			console.log("width = "+ $(this).width());
+		// 			console.log("t- x = "+ x_align);	
+		// 		});
+
+		// 	});
+		// }
+
+	  // apply spans
+      // $("h2").lettering();
+
+    });
+</script>
+</head>
+
+<body>
+	<div class="tweet">
+		Had the most vivid, amazing dream once .I were riding a *stallion* in the bush near a waterfall dressed in ceremonial pres. guard uniform.	
+		<!-- <h2 class="hovertown">Hovertown</h2> -->		
+	</div>
+		<!-- 
+		<section>
+			Justin I love you too, please follow me realize the dream of my life, I <h2 class="hovertown">love</h2> you so much! S2 @justinbieber 144
+		</section>
+		<section>
+			Get A Better Night Sleep With #zeepo <h2 class="hovertown">Sleep</h2> Mask and Dream Essentials http://tinyurl.com/kbqo8rw @DreamEssentials @mistymarie34
+		</section>
+	-->
+</body>
+</html>
