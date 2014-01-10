@@ -82,26 +82,27 @@
 
 		function alignWords() {
 			var x_align = 0,
-	    words = $('span'),
-	    fontSize = $('.main-word').css("font-size").slice(0, -2),
-	    top = $('.main-word').css("top"),
-	    i = 0, n = words.length;
+		    words = $('span'),
+		    fontSize = $('.main-word').css("font-size").slice(0, -2),
+		    top = $('.main-word').css("top"),
+		    i = 0, n = words.length;
 			(function doOne(){
-		    if (i++>=n) return;
-		    var curWord = words.eq(i-1);
+			    if (i++>=n) return;
+			    var curWord = words.eq(i-1);
 
-        console.log("t----------- starting_pos.x = "+ curWord.data("starting_pos").x);
-    		console.log("t----------- starting_pos.y = "+ curWord.data("starting_pos").y);
+	        	console.log("t----------- starting_pos.x = "+ curWord.data("starting_pos").x);
+	    		console.log("t----------- starting_pos.y = "+ curWord.data("starting_pos").y);
 
-		    curWord.toggleClass("other-word-animate")
-		    .animate({
-		        fontSize: fontSize,
-		        top: curWord.data("starting_pos").y,
-		        left: curWord.data("starting_pos").x
-		    }, function(){
-		        x_align += $(this).width() + 5;
-		        doOne();
-		    });
+			    curWord.toggleClass("other-word-animate")
+			    .animate({
+			        fontSize: fontSize,
+			        opacity: 1,
+			        top: curWord.data("starting_pos").y,
+			        left: curWord.data("starting_pos").x
+			    }, function(){
+			        x_align += $(this).width() + 5;
+			        doOne();
+			    });
 			})();
 		}
 
