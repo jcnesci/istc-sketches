@@ -4,19 +4,19 @@
 // INIT ----------------------------------------
 $(function() {
 
-	setupOriginalTweets();
+	setupOriginalTweet();
 
 });
 
 // FUNCTIONS ----------------------------------------
-function setupOriginalTweets() {
-	var words = $(".tweet").text().split(" ");
-	$(".tweet").empty();
+function setupOriginalTweet() {
+	var words = $(".original_tweet").text().split(" ");
+	$(".original_tweet").empty();
 	
 	$.each(words, function(i, word) {
 		
 		var formattedWord = $("<span>").text(word + " ");
-		var domWord = $(formattedWord).appendTo($(".tweet"));
+		var domWord = $(formattedWord).appendTo($(".original_tweet"));
 		
 		if (domWord.text().indexOf("*") !== -1) {
 			domWord.addClass("keyword");
@@ -25,23 +25,29 @@ function setupOriginalTweets() {
 
 	});
 
-	buildWords();
+	buildDreamTweet();
 }
 
-function buildWords() {
+function buildDreamTweet() {
 	
-	var words = $(".tweet > span");
+	var dreamTweet = $("<div>").addClass("dream_tweet").appendTo("body");
+	var words = $(".original_tweet > span");
 	
 	$.each(words, function(i, word) {
 
-		var wordObj = new Word();									// create a word object
-		wordObj.value = $(word).text();
-		wordObj.homePosition.x = $(word).position().left;			// store original word's position in new word object
-		wordObj.homePosition.y = $(word).position().top;
+		var wordObj = new Word( word, $(word).position().left, $(word).position().top );// create a word object
 
 		if ($(word).hasClass("keyword")) {
 			wordObj.isInteractive = true;
 		}
+
+		// append word object to new dream tweet div
+		// TODO : want to be able to do..... : ? word.setPosition(x,y)
+		// TODO : array of word objects : word[3].setPosition(x,y)
+		var domWord = $(wordObj.value).clone().appendTo(dreamTweet);
+		domWord.position().left = wordObj.homePosition.x;
+		domWord.position().top = wordObj.homePosition.y;
+
 	});
 
 }
